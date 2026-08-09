@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Quản Lý Bóng Đá</title>
+
+    <link href="css/TrangChinh.css" rel="stylesheet">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+</head>
+
+<body>
+    <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <div class="container">
+
+                <a class="navbar-brand" href="#">
+                    <img src="img/LogoCaoThang.jpg" class="logo">
+                </a>
+
+                <button class="navbar-toggler"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+                <div class="collapse navbar-collapse" id="menu">
+
+                    <ul class="navbar-nav mx-auto">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">
+                                Trang chủ
+                            </a>
+                        </li>
+
+                        <li class="nav-item dropdown">
+
+                            <a class="nav-link dropdown-toggle"
+                                data-bs-toggle="dropdown"
+                                href="#">
+                                Giải đấu
+                            </a>
+
+                            <ul class="dropdown-menu">
+
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Bóng đá
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a class="dropdown-item" href="#">
+                                        Giải thưởng
+                                    </a>
+                                </li>
+
+                            </ul>
+
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Đội thi đấu
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Bảng giá
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Blog
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                Mua sắm
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    <a href="#" class="text-white text-decoration-none me-3">
+                        Đăng nhập
+                    </a>
+
+                    <a href="#" class="btn btn-primary px-4">
+                        Đăng ký
+                    </a>
+
+                </div>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <section class="hero">
+
+        <div class="overlay">
+
+            <div class="container">
+
+                <div class="row align-items-center min-vh-100">
+
+                    <div class="col-lg-6">
+
+                        <h1 class="display-3 fw-bold text-white mb-5">
+                            Tổ chức giải đấu dễ dàng<br>
+                            Quản lý đội thể thao đơn giản!
+                        </h1>
+
+                        <div class="row g-3">
+
+                            <div class="col-6">
+                                <button class="btn btn-success w-100 rounded-pill py-3">
+                                    Tạo giải đấu
+                                </button>
+                            </div>
+
+                            <div class="col-6">
+                                <button class="btn btn-dark w-100 rounded-pill py-3">
+                                    Tìm giải đấu
+                                </button>
+                            </div>
+
+                            <div class="col-6">
+                                <button class="btn btn-dark w-100 rounded-pill py-3">
+                                    Tạo đội hình
+                                </button>
+                            </div>
+
+                            <div class="col-6">
+                                <button class="btn btn-primary w-100 rounded-pill py-3">
+                                    Quản lý đội
+                                </button>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <section class="bg-dark py-5">
+
+        <div class="container">
+
+            <div class="row text-center text-white">
+
+                <div class="col-md-3">
+
+                    <div class="badge bg-white text-dark fs-6 px-4 py-2 mb-3">
+                        Giải đấu
+                    </div>
+
+                    <h2 class="fw-bold">
+                        62.417
+                    </h2>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="badge bg-white text-dark fs-6 px-4 py-2 mb-3">
+                        Đội thi đấu
+                    </div>
+
+                    <h2 class="fw-bold">
+                        350.316
+                    </h2>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="badge bg-white text-dark fs-6 px-4 py-2 mb-3">
+                        Vận động viên
+                    </div>
+
+                    <h2 class="fw-bold">
+                        1.888.515
+                    </h2>
+
+                </div>
+
+                <div class="col-md-3">
+
+                    <div class="badge bg-white text-dark fs-6 px-4 py-2 mb-3">
+                        Trận đấu
+                    </div>
+
+                    <h2 class="fw-bold">
+                        2.076.708
+                    </h2>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <div class="social">
+
+        <a href="#" class="btn btn-success rounded-circle">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+        <a href="#" class="btn btn-success rounded-circle">
+            <i class="fab fa-facebook-messenger"></i>
+        </a>
+
+    </div>
+
+
+    <section class="process py-5 position-relative overflow-hidden">
+
+        <div class="circle circle1"></div>
+        <div class="circle circle2"></div>
+        <div class="circle circle3"></div>
+        <div class="circle circle4"></div>
+
+        <div class="container">
+
+            <div class="text-center mb-5">
+
+                <div class="title-line"></div>
+
+                <h2 class="fw-bold text-white d-inline-block ms-3">
+                    Điều hành giải
+                </h2>
+
+                <p class="text-white small">
+
+                    Có 3 giai đoạn để điều hành một giải đấu
+
+                    <span class="badge bg-primary">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        Lịch thi đấu
+                    </span>
+
+                </p>
+
+            </div>
+
+
+            <div class="green-bar"></div>
+
+
+            <img src="img/FBN.png" class="player">
+
+
+            <div class="row text-center mt-5">
+
+                <div class="col-lg-4">
+
+                    <span class="step-number">
+                        1
+                    </span>
+
+                    <h2>
+                        Tạo Giải
+                    </h2>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            Đặt tên giải
+                        </li>
+
+                        <li>
+                            Chọn thể thức
+                        </li>
+
+                        <li>
+                            Nhập số đội
+                        </li>
+
+                        <li>
+                            Chia bảng đấu
+                        </li>
+
+                        <li>
+                            Thiết lập thời gian
+                        </li>
+
+                        <li>
+                            Tạo giải đấu
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+
+                <div class="col-lg-4">
+
+                    <span class="step-number">
+                        2
+                    </span>
+
+                    <h2>
+                        Tùy chỉnh giải đấu
+                    </h2>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            Nhập danh sách đội
+                        </li>
+
+                        <li>
+                            Tạo sân thi đấu
+                        </li>
+
+                        <li>
+                            Lập lịch thi đấu
+                        </li>
+
+                        <li>
+                            Thiết lập luật giải
+                        </li>
+
+                        <li>
+                            Tùy chỉnh giai đoạn
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <div class="col-lg-4">
+
+                    <span class="step-number">
+                        3
+                    </span>
+
+                    <h2>
+                        Điều hành giải
+                    </h2>
+
+                    <ul class="list-unstyled">
+
+                        <li>
+                            Quản lý giải đấu
+                        </li>
+
+                        <li>
+                            Cập nhật kết quả
+                        </li>
+
+                        <li>
+                            Xem lịch thi đấu
+                        </li>
+
+                        <li>
+                            Thống kê giải đấu
+                        </li>
+
+                        <li>
+                            Chia sẻ giải đấu
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="tournament-section py-5">
+
+        <div class="container">
+
+            <div class="text-center mb-5">
+
+                <h2 class="fw-bold text-white mb-3">
+                Lựa chọn thể thức phù hợp cho giải bóng đá 
+                 </h2>
+
+                <p class="text-light m-0">
+                    Giải đấu bóng đá của khoa được tổ chức với 
+                    nhiều hình thức thi đấu phù hợp với số lượng đội tham gia.
+                </p>
+
+            </div>
+
+
+            <div class="row g-4 justify-content-center">
+
+                <div class="col-lg-2 col-md-4 col-6">
+
+                    <div class="tournament-card">
+
+                        <div class="thumb">
+
+                        <img src="img/Banh.jpg" class="img-fluid">
+
+                        <div class="overlay">
+                            Đội thua sẽ bị loại khỏi giải đấu,
+                            đội thắng tiếp tục vào vòng tiếp theo.
+                        </div>
+
+                    </div>
+
+                        <div class="icon">
+                            <i class="fa-solid fa-code-branch"></i>
+                        </div>
+
+                        <h4>
+                            Loại trực tiếp
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+
+                    <div class="tournament-card">
+
+                        <div class="thumb">
+
+                        <img src="img/Sân.jpg" class="img-fluid">
+
+                        <div class="overlay">
+                            Các đội lần lượt thi đấu với nhau
+                            và được tính điểm để xếp hạng.
+                        </div>
+
+                    </div>
+
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-nodes"></i>
+                        </div>
+
+                        <h4>
+                            Đấu vòng tròn
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+
+                    <div class="tournament-card">
+
+                        <div class="thumb">
+
+                        <img src="img/BangDau.png" class="img-fluid">
+
+                        <div class="overlay">
+                            Các đội được chia thành nhiều bảng
+                            và thi đấu để chọn những đội có thành tích tốt nhất.
+                        </div>
+
+                    </div>
+
+                        <div class="icon">
+                            <i class="fa-solid fa-table-cells-large"></i>
+                        </div>
+
+                        <h4>
+                            Chia bảng đấu
+                        </h4>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-2 col-md-4 col-6">
+
+                    <div class="tournament-card active">
+
+                        <div class="thumb">
+
+                            <img src="img/Wold_cup.jpg" class="img-fluid">
+
+                            <div class="overlay">
+                                Đội thua ở nhánh thắng vẫn còn cơ hội
+                                thi đấu tại nhánh thua.
+                            </div>
+
+                        </div>
+
+                        <div class="icon">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h4>Nhánh thắng -
+                            <br>
+                            Nhánh thua
+                        </h4>
+
+                    </div>
+
+                </div>
+
+
+             <div class="col-lg-2 col-md-4 col-6">
+
+                    <div class="tournament-card">
+
+                        <div class="thumb">
+
+                        <img src="img/team.jpg" class="img-fluid">
+
+                        <div class="overlay">
+                            Kết hợp nhiều giai đoạn thi đấu
+                            để phù hợp với quy mô của giải.
+                        </div>
+
+                    </div>
+
+                        <div class="icon">
+                            <i class="fa-solid fa-circle-nodes"></i>
+                        </div>
+
+                        <h4>
+                            Thể thức hỗn hợp
+                        </h4>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
