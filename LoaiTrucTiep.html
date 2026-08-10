@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/LoaiTrucTiep.css">
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/Sortable.min.js"></script>
+    <link href="./vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./vendor/bootstrap/icon/bootstrap-icons.min.css">
+    <script src="./vendor/jquery/jquery-4.0.0.min.js"></script>
+    <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</head>
+
+<body>
+    <div id="bracket">
+
+        <svg class="bracket-line"></svg>
+
+        <div class="bracket-content"></div>
+
+    </div>
+    <div id="list-team"></div>
+
+    <div class="modal fade" id="settingMatch" tabindex="-1" aria-labelledby="settingMatchLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="settingMatchLabel">Thiết lập trận đấu</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-fill nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="fill-tab-0" data-bs-toggle="tab" href="#fill-tabpanel-0" role="tab" aria-controls="fill-tabpanel-0" aria-selected="true">DIỄN BIẾN CHÍNH</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab" href="#fill-tabpanel-1" role="tab" aria-controls="fill-tabpanel-1" aria-selected="false">ĐỘI HÌNH RA SÂN</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="fill-tab-2" data-bs-toggle="tab" href="#fill-tabpanel-2" role="tab" aria-controls="fill-tabpanel-2" aria-selected="false">THỐNG KÊ</a>
+                    </li>
+                </ul>
+                <div class="tab-content pt-5" id="tab-content">
+
+                <div class="tab-pane active" id="fill-tabpanel-0">
+                    Tab 1 selected
+                </div>
+
+                <div class="tab-pane" id="fill-tabpanel-1">
+                    <div class="row">
+                        <div class="col-8" id="football-field">
+
+                            <svg class="football-svg"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 74 111"
+                                preserveAspectRatio="xMidYMid meet">
+
+                                <rect width="74" height="111" fill="#7dc891"/>
+
+                                <g fill="none" stroke="#fff" stroke-width="0.5" transform="translate(3 3)">
+                                    <path d="M 0 0 h 68 v 105 h -68 Z"/>
+                                    <path d="M 0 52.5 h 68"/>
+                                    <circle r="9.15" cx="34" cy="52.5"/>
+                                    <circle r="0.75" cx="34" cy="52.5" fill="#fff" stroke="none"/>
+
+                                    <g id="PenaltyArea">
+                                        <path d="M 13.84 0 v 16.5 h 40.32 v -16.5"/>
+                                        <path d="M 24.84 0 v 5.5 h 18.32 v -5.5"/>
+                                        <circle r="0.75" cx="34" cy="10.94" fill="#fff" stroke="none"/>
+                                        <path d="M 26.733027 16.5 a 9.15 9.15 0 0 0 14.533946 0"/>
+                                    </g>
+
+                                    <use xlink:href="#PenaltyArea" transform="rotate(180,34,52.5)" />
+
+                                    <path d="M 0 2 a 2 2 0 0 0 2 -2
+                                            M 66 0 a 2 2 0 0 0 2 2
+                                            M 68 103 a 2 2 0 0 0 -2 2
+                                            M 2 105 a 2 2 0 0 0 -2 -2"/>
+                                </g>
+
+                            </svg>
+
+                            <div class="football-overlay" id="football-overlay">
+
+                            </div>
+                        </div>
+
+                        <div id="player-list" class="col-4">
+                            
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tab-pane" id="fill-tabpanel-2">
+                    Tab 3 selected
+                </div>
+
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Lưu</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+<script src="./js/pages/LoaiTrucTiep/data.js"></script>
+<script src="./js/pages/LoaiTrucTiep/bracket.js"></script>
+<script src="./js/pages/LoaiTrucTiep/script.js"></script>
+</html>
