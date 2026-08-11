@@ -201,10 +201,11 @@ document.getElementById('saveSettingMatch').addEventListener('click', (e) => {
     document.querySelectorAll('.slot-team-1').forEach((el, key) => {
         const inputPlayer = el.querySelector('.input-player-data');
         if (inputPlayer) {
+            const slotIndex = el.dataset.slotIndex;
             const playerId = inputPlayer.dataset.playerId;
             const teamId = inputPlayer.dataset.teamId;
             const player = {
-                'position': key,
+                'slot_index': slotIndex,
                 'id' : playerId,
             };
             players1.push(player);
@@ -217,7 +218,7 @@ document.getElementById('saveSettingMatch').addEventListener('click', (e) => {
             const playerId = inputPlayer.dataset.playerId;
             const teamId = inputPlayer.dataset.teamId;
             const player = {
-                'position': key,
+                'slot_index': key,
                 'id' : playerId,
             };
             players2.push(player);
@@ -231,7 +232,7 @@ function loadDataEdit(match) {
     
     const detail_team1 = match.teams[0];
     const detail_team2 = match.teams[1];
-
+    renderPlayerInFootballPitch(true, detail_team1, detail_team2);
     renderPlayerInList(detail_team1.team, detail_team2.team);
     renderSortableSlotPlayer();
 }

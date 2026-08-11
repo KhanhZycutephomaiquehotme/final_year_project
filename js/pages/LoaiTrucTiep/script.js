@@ -5,22 +5,41 @@ window.addEventListener("resize", renderLineBracket);
 renderPlayerInFootballPitch();
 // renderPlayerInList(data[0], data[1]);
 // renderSortableSlotPlayer();
-function renderPlayerInFootballPitch() {
+function renderPlayerInFootballPitch(reload_detail = false, team1 = null, team2 = null) {
     // Render số cầu thủ trên sân
     const overlay = document.getElementById("football-overlay");
+    overlay.innerHTML = '';
 
+    let slot_index = 28;
+    let team = reload_detail ? team1 : [];
     for(let i=0;i<10;i++){
 
         const row = document.createElement("div");
         row.className = "football-row";
         let max_slot = [0,9].includes(i) ? 1 : 7;
         let classTeam = i >= 0 && i < 5 ? 'slot-team-1' : "slot-team-2";
+        if (i == 5)  {
+            slot_index = 0;
+            team = reload_detail ? team2 : [];
+        }
+
         for(let j=0;j<max_slot;j++){
 
             const player = document.createElement("div");
+            player.dataset.slotIndex = slot_index;
             player.className = `player-slot-in-pitch ${classTeam}`;
+            const find_player = team?.detail?.players?.find(p => p.slot_index == slot_index);
+            if (find_player) {
+                const divPlayer = document.createElement('div');
+                playerobj = team.team.players.find(p => p.id == find_player.id);
+                divPlayer._player = playerobj;
+                renderPlayerAvatar(divPlayer);
+                player.appendChild(divPlayer);
+            }
 
             row.appendChild(player);
+            
+            slot_index += (i >= 0 && i < 5) ? -1 : 1;   
         }
 
         overlay.appendChild(row);
