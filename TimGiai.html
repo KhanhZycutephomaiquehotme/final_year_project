@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tìm Giải</title>
+
+    <link href="css/TrangChinh.css" rel="stylesheet">
+    <link href="vendor/fontawesome/css/all.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/TrangChinh.css">
+</head>
+
+<body>
+        <header>
+
+        <nav class="navbar navbar-expand-lg navbar-dark">
+
+            <div class="container">
+
+                <a class="navbar-brand" href="#">
+                    <img src="img/LogoCaoThang.jpg" class="logo">
+                </a>
+
+                <button class="navbar-toggler"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#menu">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+               <ul class="navbar-nav mx-auto">
+
+                <!-- TRANG CHỦ -->
+                <li class="nav-item">
+                    <a class="nav-link active" href="TrangChinh.html">
+                        <i class="fa-solid fa-house me-1"></i>
+                        Trang chủ
+                    </a>
+                </li>
+
+
+                <!-- GIẢI ĐẤU -->
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link dropdown-toggle"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                        <i class="fa-solid fa-trophy me-1"></i>
+                        Giải đấu
+                    </a>
+
+                    <ul class="dropdown-menu">
+
+                        <li>
+                            <a class="dropdown-item" href="GiaiDau.html" >
+                                <i class="fa-solid fa-plus me-2"></i>
+                                Tạo giải đấu
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" href="TimGiai.html">
+                                <i class="fa-solid fa-magnifying-glass me-2"></i>
+                                Tìm giải đấu
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </li>
+
+
+                <!-- ĐỘI THI ĐẤU -->
+                <li class="nav-item">
+
+                    <a class="nav-link" href="DoiThiDau.html">
+                        <i class="fa-solid fa-people-group me-1"></i>
+                        Đội thi đấu
+                    </a>
+
+                </li>
+
+
+                <!-- BẢNG GIÁ -->
+                <li class="nav-item">
+
+                    <a class="nav-link" href="BangGia.html">
+                        <i class="fa-solid fa-tags me-1"></i>
+                        Bảng giá
+                    </a>
+
+                </li>
+
+
+                <!-- THANH TOÁN -->
+                <li class="nav-item">
+
+                    <a class="nav-link" href="ThanhToan.html">
+                        <i class="fa-solid fa-credit-card me-1"></i>
+                        Thanh toán
+                    </a>
+
+                </li>
+
+
+                <!-- ĐĂNG NHẬP -->
+                <li class="nav-item">
+
+                    <a class="nav-link" href="DangNhap.html">
+                        <i class="fa-solid fa-right-to-bracket me-1"></i>
+                        Đăng nhập
+                    </a>
+
+                </li>
+
+            </ul>
+
+
+            <!-- ĐĂNG KÝ -->
+
+            <a href="DangKi.html"
+            class="btn btn-primary px-4">
+                Đăng ký
+            </a>
+
+            </div>
+
+        </nav>
+
+    </header>
+
+    <!--Nội dung-->
+
+
+
+    <footer class="footer">
+
+    <div class="container">
+
+        <div class="footer-content">
+
+            <!-- Thông tin liên hệ -->
+            <div class="footer-contact">
+
+                <div class="footer-item">
+                    <i class="fa-solid fa-envelope"></i>
+
+                    <div>
+                        <span>Email</span>
+                        <a href="cntt@caothang.edu.vn">
+                            Email Khoa CNTT
+                        </a>
+                    </div>
+                </div>
+
+
+                <!-- Facebook CLB -->
+                <div class="footer-item">
+
+                    <i class="fa-brands fa-facebook"></i>
+
+                    <div>
+                        <span>Facebook Khoa CNTT</span>
+
+                        <a href="https://www.facebook.com/cntt.caothang"
+                           target="_blank">
+                            Facebook Khoa CNTT
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <!-- Trang trường -->
+                <div class="footer-item">
+
+                    <i class="fa-solid fa-school"></i>
+
+                    <div>
+                        <span>Website nhà trường</span>
+
+                        <a href="https://caothang.edu.vn/m/"
+                           target="_blank">
+                            Cổng thông tin nhà trường
+                        </a>
+                    </div>
+
+                </div>
+
+
+                <!-- Góp ý -->
+                <div class="footer-item">
+
+                    <i class="fa-solid fa-comment-dots"></i>
+
+                    <div>
+                        <span>Góp ý</span>
+
+                        <a href="#"
+                        data-bs-toggle="modal"
+                        data-bs-target="#feedbackModal">
+                            Gửi góp ý cho chúng tôi
+                            <i class="fa-solid fa-paper-plane feedback-arrow"></i>
+                        </a>
+                    </div>
+                    <div class="modal fade" id="feedbackModal" tabindex="-1">
+
+            <div class="modal-dialog modal-dialog-centered">
+
+                <div class="modal-content feedback-modal">
+
+                    <!-- Nội dung form góp ý -->
+                    <div class="modal-header">
+
+                        <div class="feedback-title">
+
+                            <div class="feedback-icon">
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
+
+                            <div>
+                                <h5 class="modal-title">
+                                    Gửi góp ý
+                                </h5>
+
+                                <small>
+                                    Ý kiến của bạn giúp giải đấu tốt hơn
+                                </small>
+                            </div>
+
+                        </div>
+
+                        <button type="button"
+                                class="btn-close btn-close-white"
+                                data-bs-dismiss="modal">
+                        </button>
+
+                    </div>
+
+                            <form id="feedbackForm">
+
+                                <div class="modal-body">
+
+                                    <div class="feedback-input">
+
+                                        <i class="fa-solid fa-user"></i>
+
+                                        <input type="text"
+                                            id="feedbackName"
+                                            class="form-control"
+                                            placeholder="Tên của bạn"
+                                            required>
+
+                                    </div>
+
+
+                                    <div class="feedback-input">
+
+                                        <i class="fa-solid fa-envelope"></i>
+
+                                        <input type="email"
+                                            id="feedbackEmail"
+                                            class="form-control"
+                                            placeholder="Email của bạn"
+                                            required>
+
+                                    </div>
+
+
+                                    <div class="feedback-input textarea">
+
+                                        <i class="fa-solid fa-message"></i>
+
+                                        <textarea id="feedbackMessage"
+                                                class="form-control"
+                                                rows="5"
+                                                placeholder="Nhập nội dung góp ý..."
+                                                required></textarea>
+
+                                    </div>
+
+                                </div>
+
+
+                                    <div class="modal-footer">
+
+                                        <button type="button"
+                                                class="btn feedback-cancel"
+                                                data-bs-dismiss="modal">
+                                            Đóng
+                                        </button>
+
+                                        <button type="submit"
+                                                class="btn feedback-submit">
+
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            Gửi góp ý
+
+                                        </button>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            
+        </div>
+        
+    </div>
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+
+            <p>
+                © 2026 Giải bóng đá Khoa. All rights reserved.
+            </p>
+
+            <p class="footer-location">
+                <i class="fa-solid fa-location-dot"></i>
+                65 Huỳnh Thúc Kháng, TP. Hồ Chí Minh
+            </p>
+
+        </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="js/jquery-3.7.1.min.js"></script>
+</footer>
+
+</body>
+
+</html>
