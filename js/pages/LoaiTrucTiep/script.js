@@ -14,10 +14,11 @@ function renderPlayerInFootballPitch() {
         const row = document.createElement("div");
         row.className = "football-row";
         let max_slot = [0,9].includes(i) ? 1 : 7;
+        let classTeam = i >= 0 && i < 5 ? 'slot-team-1' : "slot-team-2";
         for(let j=0;j<max_slot;j++){
 
             const player = document.createElement("div");
-            player.className = "player-slot-in-pitch";
+            player.className = `player-slot-in-pitch ${classTeam}`;
 
             row.appendChild(player);
         }
@@ -79,12 +80,13 @@ function renderPlayerInList(team1, team2) {
     const team2El = divAllTeamInList.querySelector('#list-player-in-team2');
     team2.players.forEach(player => {
         const playerInListEl = document.createElement('div');
-
+        
         playerInListEl.className = 'row me-0 pe-0 mt-2';
 
         playerInListEl._player = player;
-
+        
         renderPlayerFull(playerInListEl);
+        // playerInListEl.appendChild(inputPlayer);
 
         team2El.appendChild(playerInListEl);
     });
@@ -92,6 +94,11 @@ function renderPlayerInList(team1, team2) {
 }
 function renderPlayerFull(playerEl) {
     const player = playerEl._player;
+    const inputPlayer = document.createElement('input');
+    inputPlayer.className = 'input-player-data';
+    inputPlayer.type = 'hidden';
+    inputPlayer.dataset.teamId = player.id;
+    inputPlayer.dataset.playerId = player.id;
 
     playerEl.className = 'row me-0 pe-0 mt-2';
 
@@ -111,9 +118,15 @@ function renderPlayerFull(playerEl) {
             </div>
         </div>
     `;
+    playerEl.appendChild(inputPlayer);
 }
 function renderPlayerAvatar(playerEl) {
     const player = playerEl._player;
+    const inputPlayer = document.createElement('input');
+    inputPlayer.className = 'input-player-data';
+    inputPlayer.type = 'hidden';
+    inputPlayer.dataset.teamId = player.id;
+    inputPlayer.dataset.playerId = player.id;
 
     playerEl.className = 'player-avatar-in-pitch';
 
@@ -122,6 +135,7 @@ function renderPlayerAvatar(playerEl) {
             <span>${getAvatarText(player.name)}</span>
         </div>
     `;
+    playerEl.appendChild(inputPlayer);
 }
 function renderSortableSlotPlayer () {
     new Sortable(document.getElementById('list-player-in-team1'), {
