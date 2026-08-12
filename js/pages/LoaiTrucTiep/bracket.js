@@ -178,64 +178,7 @@ function renderBracketNew(selector, data = [], isCreate = true) {
     renderLineBracket();
 
 }
-function _handleEventIconEdit_Click(e) {
-    console.log(e);
-    const settingMatchModalEL = document.getElementById('settingMatch');
-    const matchKey = e.currentTarget.dataset.matchKey;
-    settingMatchModalEL.dataset.matchKey = matchKey;
-    const [roundIndex, matchIndex] = matchKey.split("_");
-    const match = rounds[roundIndex][matchIndex];
-    loadDataEdit(match);
-    $('#settingMatch').modal('show');
-}
-// event click save setting match 
-document.getElementById('saveSettingMatch').addEventListener('click', (e) => {
-    const settingMatchModalEL = document.getElementById('settingMatch');
-    const matchKey = settingMatchModalEL.dataset.matchKey;
-    const [roundIndex, matchIndex] = matchKey.split("_");
-    const match = rounds[roundIndex][matchIndex];
-    // const team1 = match.teams[0];
-    // const team2 = match.teams[1];
-    // lấy setting player trên sân
-    players1 = [];
-    document.querySelectorAll('.slot-team-1').forEach((el, key) => {
-        const inputPlayer = el.querySelector('.input-player-data');
-        if (inputPlayer) {
-            const slotIndex = el.dataset.slotIndex;
-            const playerId = inputPlayer.dataset.playerId;
-            const teamId = inputPlayer.dataset.teamId;
-            const player = {
-                'slot_index': slotIndex,
-                'id' : playerId,
-            };
-            players1.push(player);
-        }
-    })
-    players2 = [];
-    document.querySelectorAll('.slot-team-2').forEach((el, key) => {
-        const inputPlayer = el.querySelector('.input-player-data');
-        if (inputPlayer) {
-            const playerId = inputPlayer.dataset.playerId;
-            const teamId = inputPlayer.dataset.teamId;
-            const player = {
-                'slot_index': key,
-                'id' : playerId,
-            };
-            players2.push(player);
-        }
-    })
-    // Lưu setting cầu thủ trên sân
-    rounds[roundIndex][matchIndex].teams[0].detail.players = players1;
-    rounds[roundIndex][matchIndex].teams[1].detail.players = players2;
-})
-function loadDataEdit(match) {
-    
-    const detail_team1 = match.teams[0];
-    const detail_team2 = match.teams[1];
-    renderPlayerInFootballPitch(true, detail_team1, detail_team2);
-    renderPlayerInList(detail_team1.team, detail_team2.team);
-    renderSortableSlotPlayer();
-}
+
 function renderLineBracket(){
     const svg = document.querySelector("#bracket-line");
     svg.innerHTML = '';
