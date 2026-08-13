@@ -179,42 +179,61 @@ function renderBracketNew(selector, data = [], isCreate = true) {
 
 }
 
-function renderLineBracket(){
+function renderLineBracket() {
     const svg = document.querySelector("#bracket-line");
+    const bracket = document.querySelector("#bracket");
+
     svg.innerHTML = '';
-    const rounds = document.querySelectorAll('.round');
+
+    // Lấy toàn bộ kích thước nội dung bracket
+    const width = bracket.scrollWidth;
+    const height = bracket.scrollHeight;
+
+    svg.setAttribute('width', width);
+    svg.setAttribute('height', height);
+
+    svg.style.width = `${width}px`;
+    svg.style.height = `${height}px`;
+
+    const rounds = bracket.querySelectorAll('.round');
     const count_round = rounds.length;
+
     for (let i = 0; i < count_round - 1; i++) {
         const matchs_current = rounds[i].querySelectorAll('.match');
-        const matchs_next    = rounds[i+1].querySelectorAll('.match');
-        const count_match    = matchs_current.length;
-        
+        const matchs_next = rounds[i + 1].querySelectorAll('.match');
+
+        const count_match = matchs_current.length;
+
         let index_match_next = 0;
-        for (let j = 0; j < count_match; j = j + 2) {
-            a = matchs_current[j];
-            b = matchs_current[j+1];
-            c = null;
+
+        for (let j = 0; j < count_match; j += 2) {
+            let a = matchs_current[j];
+            let b = matchs_current[j + 1];
+            let c = null;
+
             if (!b) {
-
                 b = matchs_next[index_match_next++];
-            } else c = matchs_next[index_match_next++];
-            _renderLineBracket(a, b, c);
-                
-        }
-        
-    }
+            } else {
+                c = matchs_next[index_match_next++];
+            }
 
+            _renderLineBracket(a, b, c);
+        }
+    }
 }
 function _renderLineBracket(a, b, c = null) {
     const svg = document.querySelector("#bracket-line");
-    const p1 = pointRight(a, svg);
-    let p2, p3;
-    if (c == null) {
-        p2 = pointLeft(b, svg);
-    } else {
+    const container = document.querySelector("#bracket");
 
-        p2 = pointRight(b, svg);
-        p3 = pointLeft(c, svg);
+    const p1 = pointRight(a, container);
+
+    let p2, p3;
+
+    if (c == null) {
+        p2 = pointLeft(b, container);
+    } else {
+        p2 = pointRight(b, container);
+        p3 = pointLeft(c, container);
     }
 
     let path = null;
@@ -251,25 +270,23 @@ function _renderLineBracket(a, b, c = null) {
     pathEl.setAttribute("fill", "none");
     svg.appendChild(pathEl);
 }
-function pointRight(el, svg){
-
+function pointRight(el, container) {
     const r = el.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
+    const c = container.getBoundingClientRect();
 
     return {
-        x: r.right - svgRect.left,
-        y: r.top + r.height/2 - svgRect.top
+        x: r.right - c.left + container.scrollLeft,
+        y: r.top + r.height / 2 - c.top + container.scrollTop
     };
 }
 
-function pointLeft(el, svg){
-
+function pointLeft(el, container) {
     const r = el.getBoundingClientRect();
-    const svgRect = svg.getBoundingClientRect();
+    const c = container.getBoundingClientRect();
 
     return {
-        x: r.left - svgRect.left,
-        y: r.top + r.height/2 - svgRect.top
+        x: r.left - c.left + container.scrollLeft,
+        y: r.top + r.height / 2 - c.top + container.scrollTop
     };
 }
 function renderListTeam() {

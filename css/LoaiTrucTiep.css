@@ -1,6 +1,7 @@
 #bracket{
     position:relative;
     overflow:auto;
+    font-size: 0.7em;
 }
 
 .bracket-content{
@@ -11,7 +12,7 @@
 
 .round{
 
-    width:360px;
+    width:300px;
 
     display:flex;
     flex-direction:column;
@@ -41,7 +42,7 @@
     align-items: center; */
     position: relative;
     display: grid;
-    grid-template-columns: 320px 40px;
+    grid-template-columns: 260px 40px;
     grid-template-rows: 50px 50px;
 }
 .team{
@@ -113,11 +114,10 @@
     pointer-events: none;
 }
 #bracket-line{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
 }
 .edit-team-round{
     color: blue;
@@ -225,4 +225,7 @@
     color: white;
     font-weight: bold;
     font-size: 16px;
+}
+.container-icon-development {
+    width:24px;
 }
