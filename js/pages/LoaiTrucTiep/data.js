@@ -1,3 +1,39 @@
+const football_fields = [
+    {
+        id: 1,
+        name: "Sân vận động Mỹ Đình",
+        address: "Mỹ Đình, Nam Từ Liêm, Hà Nội",
+    },
+    {
+        id: 2,
+        name: "Sân vận động Hàng Đẫy",
+        address: "Hàng Đẫy, Ba Đình, Hà Nội",
+    },
+    {
+        id: 3,
+        name: "Sân vận động Cửa Ông",
+        address: "Cửa Ông, Cẩm Phả, Quảng Ninh",
+    },
+    {
+        id: 4,
+        name: "Sân vận động Thiên Trường",
+        address: "Thiên Trường, Nam Định",
+    }
+];
+const referees = [
+    {
+        id: 1,
+        name: "Trọng tài A",
+    },
+    {
+        id: 2,
+        name: "Trọng tài B",
+    },
+    {
+        id: 3,
+        name: "Trọng tài C",
+    },
+];
 const data = [
     { 
         id: 1,

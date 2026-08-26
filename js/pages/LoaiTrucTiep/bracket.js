@@ -1,79 +1,19 @@
-// function renderBracket(selector, data) {
-
-//     const bracket = document.querySelector(selector);
-
-//     bracket.innerHTML = `
-//         <svg class="bracket-line"></svg>
-//         <div class="bracket-content"></div>
-//     `;
-
-//     const content = bracket.querySelector(".bracket-content");
-
-//     data.forEach(round => {
-
-//         const roundEl = document.createElement("div");
-//         roundEl.className = "round";
-
-//         roundEl.innerHTML = `
-//             <div class="round-title">${round.title}</div>
-//             <div class="matches"></div>
-//         `;
-
-//         const matches = roundEl.querySelector(".matches");
-
-//         round.matches.forEach(match => {
-
-//             const matchEl = document.createElement("div");
-//             matchEl.className = "match";
-
-//             match.teams.forEach(team => {
-
-//                 const teamEl = document.createElement("div");
-//                 teamEl.className = "team";
-
-//                 teamEl.innerHTML = `
-//                     <div class="team-icon">🏆</div>
-
-//                     <div class="team-name">
-//                         ${team.name}
-//                     </div>
-
-//                     <div class="team-score">
-//                         ${team.score ?? "-"}
-//                     </div>
-//                 `;
-
-//                 matchEl.appendChild(teamEl);
-
-//             });
-
-//             matches.appendChild(matchEl);
-
-//         });
-
-//         content.appendChild(roundEl);
-
-//     });
-
 // }
-function renderBracketNew(selector, data = [], isCreate = true) {
-     
-    const bracket = document.querySelector(selector);
+/** 
+ * Function render bracket mới
+ * @param {number} team_length Số lượng đội
+ * @param {boolean} isCreate Có phải là thêm mới hay không? (Cờ check nếu là thêm mới thì mới khởi tạo mảng rounds tạm thời)
+ */
+function renderBracketNew(team_length, isCreate = true) {
 
-    bracket.innerHTML = `
-        <div class="bracket-content"></div>
-        <svg id="bracket-line"></svg>
-    `;
-
-    const content     = bracket.querySelector(".bracket-content");
-    const team_length = data.length;
+    const content     = state.elements.bracketContent;
     // Lấy số vòng
     let round_team  = team_length;
     let count_round = 0;
 
     while (round_team > 1) {
         // Tạo số vòng
-        let txt_round_team = `Round of 32`;
+        let txt_round_team = `Round of ${round_team}`;
         if (round_team == 16) {
             txt_round_team = 'Vòng 1 / 8'
         }else if (round_team == 8) {
@@ -96,6 +36,7 @@ function renderBracketNew(selector, data = [], isCreate = true) {
         for (let i_match = 0; i_match < (round_team / 2); i_match++) {
             let match = {
                 'match_number': i_match,
+                'round_number': count_round,
                 'teams' : [
 
                 ]
@@ -148,7 +89,7 @@ function renderBracketNew(selector, data = [], isCreate = true) {
             matches.appendChild(editMatchContent);
             round.push(match);
         }
-        if (isCreate) rounds.push(round);
+        if (isCreate) state.tournament.rounds.push(round);
         content.appendChild(roundEl);
         round_team = Math.floor(round_team / 2);
         count_round++;
@@ -178,10 +119,12 @@ function renderBracketNew(selector, data = [], isCreate = true) {
     renderLineBracket();
 
 }
-
+/**
+ * Hàm vẽ đường line cho bracket
+ */
 function renderLineBracket() {
-    const svg = document.querySelector("#bracket-line");
-    const bracket = document.querySelector("#bracket");
+    const svg = state.elements.bracketLine;
+    const bracket = state.elements.bracket;
 
     svg.innerHTML = '';
 
@@ -221,19 +164,25 @@ function renderLineBracket() {
         }
     }
 }
+/**
+ * Function vẽ đường line giữa 2 trận đấu
+ * @param {Element} a Element match thứ 1
+ * @param {Element} b Element match thứ 2
+ * @param {Element} c Element match của vòng sau (Nếu có)
+ */
 function _renderLineBracket(a, b, c = null) {
-    const svg = document.querySelector("#bracket-line");
-    const container = document.querySelector("#bracket");
+    const svg = state.elements.bracketLine;
+    const bracket = state.elements.bracket;
 
-    const p1 = pointRight(a, container);
+    const p1 = pointRight(a, bracket);
 
     let p2, p3;
 
     if (c == null) {
-        p2 = pointLeft(b, container);
+        p2 = pointLeft(b, bracket);
     } else {
-        p2 = pointRight(b, container);
-        p3 = pointLeft(c, container);
+        p2 = pointRight(b, bracket);
+        p3 = pointLeft(c, bracket);
     }
 
     let path = null;
@@ -289,9 +238,12 @@ function pointLeft(el, container) {
         y: r.top + r.height / 2 - c.top + container.scrollTop
     };
 }
+/**
+ * Function render danh sách đội bóng (Dùng để kéo thả vào các slot của bracket)
+ */
 function renderListTeam() {
-    const listTeam = document.querySelector('#list-team');
-    data.forEach((team) => {
+    const listTeam = state.elements.listTeam;
+    state.data.teams.forEach((team) => {
         const teamEL = document.createElement('div');
         teamEL.className = "team-in-list";
         teamEL.dataset.teamId = team.id;
@@ -307,8 +259,14 @@ function renderListTeam() {
         listTeam.appendChild(teamEL);
     });
 }
+/**
+ * Function khởi tạo sortable cho các slot của bracket và danh sách đội bóng
+ * 1. Kéo thả từng đội bóng ở danh sách đội bóng vào ô slot (hoặc ngược lại)
+ * 2. Mỗi slot chỉ được chứ 1 đội
+ * 3. Khi kéo 1 đội khác vào slot đã có đội thì sẽ swap 2 đội
+ */
 function renderSortable() {
-    const listTeamEL = document.getElementById('list-team');
+    const listTeamEL = state.elements.listTeam;
     new Sortable(listTeamEL, {
         group: {
             name: 'players',
@@ -316,7 +274,7 @@ function renderSortable() {
             // put: false       // không nhận item
         },
         sort: false,
-        // handle: '.drag-handle',
+        // handle: '.drag-handle', 
         bubbleScroll: true,
         forceFallback: true,
         animation: 150
@@ -512,7 +470,7 @@ function _handleUpdateMatch (matchEL) {
 
     const [roundIndex, matchIndex] = matchKey.split('_');
 
-    const match = rounds[roundIndex][matchIndex];
+    const match = state.tournament.rounds[roundIndex][matchIndex];
 
     return {
         match,
@@ -542,6 +500,6 @@ function _handleGetSlotInfo(slotEL) {
         matchEL,
         matchKey,
         slotIndex,
-        match: rounds[roundIndex][matchIndex]
+        match: state.tournament.rounds[roundIndex][matchIndex]
     };
 }

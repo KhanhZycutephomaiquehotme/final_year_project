@@ -4,7 +4,7 @@
     font-size: 0.7em;
 }
 
-.bracket-content{
+#bracket-content{
     display:flex;
     align-items:stretch;
     gap:120px;
@@ -228,4 +228,8 @@
 }
 .container-icon-development {
     width:24px;
+}
+.title-team-name{
+    /* font-size:2em; */
+    font-weight: bold;
 }

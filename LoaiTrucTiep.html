@@ -11,20 +11,21 @@
     <link rel="stylesheet" href="./vendor/bootstrap/icon/bootstrap-icons.min.css">
     <script src="./vendor/jquery/jquery-4.0.0.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
+    <link rel="stylesheet" href="./vendor/select2/css/select2.min.css">
+    <script src="./vendor/select2/js/select2.min.js"></script>
 </head>
 
 <body>
     <div id="bracket">
 
-        <svg class="bracket-line"></svg>
+        <svg id="bracket-line"></svg>
 
-        <div class="bracket-content"></div>
+        <div id="bracket-content"></div>
 
     </div>
     <div id="list-team"></div>
 
-    <div class="modal fade" id="settingMatch" tabindex="-1" aria-labelledby="settingMatchLabel" aria-hidden="true">
+    <div class="modal fade" id="settingMatch" data-bs-focus="false" tabindex="-1" aria-labelledby="settingMatchLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl">
             <div class="modal-content">
             <div class="modal-header">
@@ -34,112 +35,77 @@
             <div class="modal-body">
                 <ul class="nav nav-fill nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="fill-tab-0" data-bs-toggle="tab" href="#fill-tabpanel-0" role="tab" aria-controls="fill-tabpanel-0" aria-selected="true">DIỄN BIẾN CHÍNH</a>
+                        <a class="nav-link active" id="fill-tab-0" data-bs-toggle="tab" href="#fill-tabpanel-0" role="tab" aria-controls="fill-tabpanel-0" aria-selected="true">THÔNG TIN TRẬN ĐẤU</a>
                     </li>
                     <li class="nav-item" role="presentation">
                         <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab" href="#fill-tabpanel-1" role="tab" aria-controls="fill-tabpanel-1" aria-selected="false">ĐỘI HÌNH RA SÂN</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="fill-tab-2" data-bs-toggle="tab" href="#fill-tabpanel-2" role="tab" aria-controls="fill-tabpanel-2" aria-selected="false">THỐNG KÊ</a>
+                        <a class="nav-link" id="fill-tab-2" data-bs-toggle="tab" href="#fill-tabpanel-2" role="tab" aria-controls="fill-tabpanel-2" aria-selected="false">DIỄN BIẾN CHÍNH</a>
                     </li>
                 </ul>
                 <div class="tab-content pt-5" id="tab-content">
 
+                <!-- TAB THÔNG TIN TRẬN ĐẤU -->
                 <div class="tab-pane active" id="fill-tabpanel-0">
-                    <!-- THIẾT LẬP DIỄN BIẾN TRẬN ĐẤU -->
-                    <div class="d-flex flex-column p-3">
-                        <div class="mb-2 mx-auto">
-                            <div class="card">
-                                <div class="card-header d-flex">
-                                    <div class="container-icon-development">
-                                        <svg aria-hidden="true" viewBox="0 0 24 24">
-                                            <g fill="none">
-                                                <path d="M0 0h24v24H0z"></path>
-                                                <path d="m11 16.672 5 5.078 5-5.078h-3.75V7.75h-2.5v8.922z" fill="#D0021B"></path>
-                                                <path d="M8 2 3 7.078h3.75V16h2.5V7.078H13z" fill="#259B24"></path>
-                                            </g>
-                                        </svg>
+                    <form>
+                        <div class="form-group mb-3">
+                            <label for="selectFootballField" class="mb-2">Chọn sân đấu</label>
+                            <select class="form-select form-control" id="selectFootballField" aria-label="Default select example" data-placeholder="Chọn sân đấu">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="selectReferee" class="mb-2">Chọn trọng tài</label>
+                            <select class="form-select form-control" id="selectReferee" aria-label="Default select example" data-placeholder="Chọn trọng tài">
+                                <option></option>
+                            </select>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label for="matchTime" class="mb-2">Chọn thời gian diễn tra trận đấu</label>
+                            <input type="datetime-local" class="form-control" id="matchTime">
+                        </div>
+                        <div class="form-group mb-3 row">
+                            <div class="col-6">
+                                <label class="mb-2">Thiết lập tỉ số trận đấu</label>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input " type="radio" name="radioSettingMatchScore" id="radioSettingMatchScore1" checked>
+                                        <label class="form-check-label" for="radioSettingMatchScore1">
+                                            Tự thiết lập
+                                        </label>
                                     </div>
-                                    <div>Thay người</div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="radioSettingMatchScore" id="radioSettingMatchScore2">
+                                        <label class="form-check-label" for="radioSettingMatchScore2">
+                                            Thiết lập theo diễn biến trận đấu
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                            </div>
+                            <div class="col-6 border-start">
+                                <label for="selectReferee" class="mb-2">Tỉ số</label>
+                                <div class="d-flex align-items-center">
+                                    <div class="w-25 me-2"><label for="score1">Đội 1</label></div>
+                                    <span class="mx-2">&nbsp;</span>
+                                    <div class="w-25 ms-2"><label for="score2">Đội 2</label></div>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <input type="number" class="form-control w-25 me-2" id="scoreTeam1" placeholder="0">
+                                    <span class="mx-2">-</span>
+                                    <input type="number" class="form-control w-25 ms-2" id="scoreTeam2" placeholder="0">
                                 </div>
                             </div>
                         </div>
-                        <div class="mb-2 mx-auto">
-                            <div class="card">
-                                <div class="card-header d-flex">
-                                    <div class="container-icon-development">
-                                        <svg aria-hidden="true" viewBox="0 0 24 24">
-                                            <rect fill="#FFEB3B" height="18" rx="2" width="12" x="6" y="3"></rect>
-                                            <g fill="none">
-                                                <rect height="17" rx="2" stroke="#000" stroke-opacity=".1" width="11" x="6.5" y="3.5"></rect>
-                                                <rect height="19" rx="2" stroke="#DFE1E5" width="13" x="5.5" y="2.5"></rect>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div>Thẻ vàng</div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-2 mx-auto">
-                            <div class="card">
-                                <div class="card-header d-flex">
-                                    <div class="container-icon-development">
-                                        <svg aria-hidden="true" viewBox="0 0 24 24">
-                                            <rect fill="#FF0000" height="18" rx="2" width="12" x="6" y="3"></rect>
-                                            <g fill="none">
-                                                <rect height="17" rx="2" stroke="#000" stroke-opacity=".1" width="11" x="6.5" y="3.5"></rect>
-                                                <rect height="19" rx="2" stroke="#DFE1E5" width="13" x="5.5" y="2.5"></rect>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div>Thẻ đỏ</div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="mb-2 mx-auto">
-                            <div class="card">
-                                <div class="card-header d-flex flex-column align-items-center text-white bg-danger">
-                                    <div class="my-3">
-                                        <img src="./img/ball.svg" alt="Ball icon">
-                                    </div>
-                                    <div>
-                                        VÀOOOOOOOO! 
-                                    </div>
-                                    <div class="d-flex flex-row w-100" style="font-size:0.7em">
-                                        <div class="text-end"style="width:44.5%">#Đội 1</div>
-                                        <div style="width:3%" class="text-center">1</div>
-                                        <div style="width:5%" class="text-center">-</div>
-                                        <div style="width:3%" class="text-center">0</div>
-                                        <div class="text-start" style="width:44.5%">#Đội 2</div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">Special title treatment</h5>
-                                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                    </div>
+                    </form>
                 </div>
 
+                <!-- TAB THIẾT LẬP CẦU THỦ RA SÂN -->
                 <div class="tab-pane" id="fill-tabpanel-1">
-                    <!-- THIẾT LẬP CẦU THỦ RA SÂN_-->
                     <div class="row">
                         <div class="col-8" id="football-field">
 
+                            <!-- HỈNH ẢNH SÂN BÓNG -->
                             <svg class="football-svg"
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 74 111"
@@ -170,19 +136,42 @@
 
                             </svg>
 
+                            <!-- LƯỚI CẦU THỦ TRÊN SÂN (SLOT PLAYER) -->
                             <div class="football-overlay" id="football-overlay">
 
                             </div>
                         </div>
 
-                        <div id="player-list" class="col-4">
-                            
+                        <!-- DANH SÁCH CẦU THỦ CỦA TỪNG ĐỘI BÓNG (CHỈ BAO GÒM CHƯA RA SẤN, RA SÂN RỒI THÌ SẼ CÓ TRÊN element id football-overlay) -->
+                        <div class="col-4">
+                            <div class="col-12 h-100" id="player-list">
+                                <div id="team1" class="h-50">
+                                    <div class="title-team-name" id="team1-name">TÊN ĐỘI 1</div>
+                                    <div class="h-75 overflow-scroll">
+                                        <div id="list-player-in-team1" class="me-0 row player-in-list">
+                                        
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="team2" class="row h-50">
+                                    <div class="title-team-name" id="team2-name">TÊN ĐỘI 2</div>
+                                    <div class="h-75 overflow-scroll">
+                                        <div id="list-player-in-team2" class="me-0 row player-in-list">
+    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
+
+                <!-- THIẾT LẬP DIỄN BIẾN TRẬN ĐẤU -->
                 <div class="tab-pane" id="fill-tabpanel-2">
-                    Tab 3 selected
+                    <div class="d-flex flex-column p-3" id="match-flow-list">
+                    
+                    </div>
                 </div>
 
             </div>
@@ -197,6 +186,7 @@
     
 
 </body>
+<script src="./js/pages/LoaiTrucTiep/matchDetail/formation.js"></script> 
 <script src="./js/pages/LoaiTrucTiep/match_detail.js"></script> 
 <script src="./js/pages/LoaiTrucTiep/data.js"></script>
 <script src="./js/pages/LoaiTrucTiep/bracket.js"></script>
