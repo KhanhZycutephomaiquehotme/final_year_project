@@ -17,7 +17,7 @@ const state = {
         listTeam      : document.getElementById('list-team'),
         // Modal thiết lập trận đấu
         detailMatchModal   : {
-            modal                  : document.getElementById('settingMatch'),
+            modal: document.getElementById('settingMatch'),
             // Thiết lập cầu thủ ra sân
             footballOverlay: document.getElementById('football-overlay'),
             playerList     : document.getElementById('player-list'),
@@ -26,9 +26,19 @@ const state = {
             inputScoreTeam1        : document.getElementById('scoreTeam1'),
             inputScoreTeam2        : document.getElementById('scoreTeam2'),
             radioSettingMatchScores: document.querySelectorAll('input[name="radioSettingMatchScore"]'),
+            radioSettingMatchScore1: document.getElementById('radioSettingMatchScore1'),
+            radioSettingMatchScore2: document.getElementById('radioSettingMatchScore2'),
             selectFootballField    : document.getElementById('selectFootballField'),
             selectReferee          : document.getElementById('selectReferee'),
-
+            matchTime              : document.getElementById('matchTime'),
+            // Thiết lập diễn biến trận đấu
+            // Màn che
+            matchFlowLock         : document.getElementById('match-flow-lock'),
+            matchFlowContainerDemo: document.getElementById('match-flow-container-demo'),
+            matchFlowContainer    : document.getElementById('match-flow-container'),
+            matchFlowDemo         : document.getElementById('match-flow-demo'),
+            matchFlow             : document.getElementById('match-flow-list'),
+            btnEnableMatchFlow    : document.getElementById('btn-enable-match-flow'),
             // Thiết lập diễn biến trận đấu
             matchFlowList: document.getElementById('match-flow-list'),
 
@@ -48,7 +58,7 @@ async function init () {
     await prepareDataEdit();
 } 
 async function prepareDataEdit() {
-    const footballFieldSelect = state.elements.detailMatchModal.footballOverlay;
+    const footballFieldSelect = state.elements.detailMatchModal.selectFootballField;
     state.data.football_fields.forEach((field) => {
         const option = document.createElement('option');
         option.value = field.id;
@@ -86,7 +96,7 @@ async function temp_renderMatchFlow() {
     const yellow_card_html = yellow_card_template.content.cloneNode(true);
     const substitute_html = substitute_template.content.cloneNode(true);
 
-    const match_flow_container = state.elements.detailMatchModal.matchFlowList;
+    const match_flow_container = state.elements.detailMatchModal.matchFlowDemo;
     match_flow_container.appendChild(goal_html);
     match_flow_container.appendChild(red_card_html);
     match_flow_container.appendChild(yellow_card_html);
@@ -102,26 +112,12 @@ async function loadDataComponents() {
     }
 
     const html = await response.text();
-    console.log(html);
 
     const container = document.createElement('div');
     container.innerHTML = html;
 
     document.body.appendChild(container);
 }
-state.elements.detailMatchModal.radioSettingMatchScores.forEach((radio) => {
-    radio.addEventListener('change', (event) => {
-        const selectedValue = event.target.id;
-        if (selectedValue === 'radioSettingMatchScore1') {
-            // Tự thiết lập
-            state.elements.detailMatchModal.inputScoreTeam1.disabled = false;
-            state.elements.detailMatchModal.inputScoreTeam2.disabled = false;
-        } else if (selectedValue === 'radioSettingMatchScore2') {
-            // Thiết lập theo diễn biến trận đấu
-            state.elements.detailMatchModal.inputScoreTeam1.disabled = true;
-            state.elements.detailMatchModal.inputScoreTeam2.disabled = true;
-        }
-    });
-});
+
 
 init();

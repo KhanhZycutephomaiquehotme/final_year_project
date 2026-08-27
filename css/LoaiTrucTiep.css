@@ -233,3 +233,42 @@
     /* font-size:2em; */
     font-weight: bold;
 }
+
+.match-flow-body {
+    position: relative;
+    min-height: 500px;
+}
+
+.match-flow-lock {
+    position: absolute;
+    inset: 0;
+    z-index: 10;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(2px);
+
+    transition: opacity .2s ease;
+}
+
+.match-flow-lock.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.match-flow-lock-content {
+    text-align: center;
+}
+
+.match-flow-lock-icon {
+    font-size: 32px;
+    margin-bottom: 12px;
+}
+
+.match-flow-lock-title {
+    font-size: 17px;
+    font-weight: 500;
+}

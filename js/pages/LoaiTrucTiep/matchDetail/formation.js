@@ -30,7 +30,7 @@ function renderPlayerInFootballPitch(reload_detail = false, team1 = null, team2 
             const find_player = team?.detail?.players?.find(p => p.slot_index == slot_index);
             if (find_player) {
                 const divPlayer = document.createElement('div');
-                playerobj = team.team.players.find(p => p.id == find_player.id);
+                const playerobj = team.team.players.find(p => p.id == find_player.id);
                 divPlayer._player = playerobj;
                 renderPlayerAvatar(divPlayer);
                 player.appendChild(divPlayer);
@@ -180,7 +180,7 @@ function renderSortableSlotPlayer () {
 
             // Element đang được kéo
             evt.item.classList.add('player-dragging');
-            // renderPlayerAvatar(evt.item);
+            renderPlayerAvatar(evt.item);
         },
 
         onEnd(evt) {
@@ -209,7 +209,7 @@ function renderSortableSlotPlayer () {
 
             // Element đang được kéo
             evt.item.classList.add('player-dragging');
-            // renderPlayerAvatar(evt.item);
+            renderPlayerAvatar(evt.item);
         },
 
         onEnd(evt) {

@@ -35,9 +35,15 @@ function renderBracketNew(team_length, isCreate = true) {
         let matchList = [];
         for (let i_match = 0; i_match < (round_team / 2); i_match++) {
             let match = {
-                'match_number': i_match,
-                'round_number': count_round,
-                'teams' : [
+                'match_number'       : i_match,
+                'round_number'       : count_round,
+                'football_field_id'  : null,
+                'referee_id'         : null,
+                'match_time'         : null,
+                'setting_match_score': 1,
+                'team1_score'        : 0,
+                'team2_score'        : 0,
+                'teams'              : [
 
                 ]
             };
@@ -228,7 +234,6 @@ function pointRight(el, container) {
         y: r.top + r.height / 2 - c.top + container.scrollTop
     };
 }
-
 function pointLeft(el, container) {
     const r = el.getBoundingClientRect();
     const c = container.getBoundingClientRect();
