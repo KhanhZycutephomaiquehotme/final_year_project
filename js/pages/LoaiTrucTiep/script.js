@@ -45,6 +45,14 @@ const state = {
         }
     }
 }
+// Tính bằng phút
+const time_max = {
+    "round_1"        : 45,
+    "min_round_1"    : 0,
+    "round_2"        : 90,
+    "min_round_2"    : 45,
+    "every_round_sub": 15,
+}
 
 async function init () {
     await loadDataComponents();
@@ -56,6 +64,13 @@ async function init () {
     await temp_renderMatchFlow();
     // Chuẩn bị sẵn data cho edit match
     await prepareDataEdit();
+    // $('#settingMatch').modal('show');
+    state.elements.detailMatchModal.radioSettingMatchScore2.checked = true;
+    state.elements.detailMatchModal.radioSettingMatchScore2.dispatchEvent(
+            new Event('change', { bubbles: true })
+    );
+    // $('#fill-tabpanel-2').tab('show');
+    $('#eventFormPanel').offcanvas('show');
 } 
 async function prepareDataEdit() {
     const footballFieldSelect = state.elements.detailMatchModal.selectFootballField;
