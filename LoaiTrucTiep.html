@@ -196,7 +196,7 @@
                         </div>
                         <div id="match-flow-container">
                             <div class="float-end">
-                                <button type="button" class="btn btn-success" data-bs-toggle="offcanvas" data-bs-target="#eventFormPanel">Thêm mới</button>
+                                <button type="button" class="btn btn-success" id="show-panel-add-event">Thêm mới</button>
                             </div>
                             
                             <div class="d-flex flex-column p-3" id="match-flow-list">
@@ -214,79 +214,79 @@
             </div>
         </div>
     </div>
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="eventFormPanel">
-                                <div class="offcanvas-header">
-                                    <h5 class="offcanvas-title">Thêm sự kiện</h5>
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="eventFormPanel" style="z-index:9999">
+        <div class="offcanvas-header">
+            <h5 class="offcanvas-title" >Thêm sự kiện</h5>
 
-                                    <button type="button" class="btn-close"data-bs-dismiss="offcanvas"></button>
-                                </div>
+            <button type="button" class="btn-close"data-bs-dismiss="offcanvas"></button>
+        </div>
 
-                                <div class="offcanvas-body">
+        <div class="offcanvas-body">
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Loại sự kiện</label>
+            <div class="mb-3">
+                <label class="form-label" for="detail-event-type">Loại sự kiện</label>
 
-                                        <select class="form-select">
-                                            <option>⚽ Bàn thắng</option>
-                                            <option>🟨 Thẻ vàng</option>
-                                            <option>🟥 Thẻ đỏ</option>
-                                            <option>🔄 Thay người</option>
-                                            <option>🎯 Luân lưu</option>
-                                        </select>
-                                    </div>
+                <select class="form-select" id="detail-event-type">
+                    <option value="1">⚽ Bàn thắng</option>
+                    <option value="2">🟨 Thẻ vàng</option>
+                    <option value="3">🟥 Thẻ đỏ</option>
+                    <option value="4">🔄 Thay người</option>
+                    <option value="5">🎯 Luân lưu</option>
+                </select>
+            </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Hiệp</label>
+            <div class="mb-3">
+                <label class="form-label" for="detail-round-flow">Hiệp</label>
 
-                                        <select class="form-select change-time-start" id="round-flow" name="round-flow">
-                                            <option value="1">Hiệp 1</option>
-                                            <option value="2">Hiệp 2</option>
-                                            <option value="-1">Hiệp phụ</option>
+                <select class="form-select change-time-start" id="detail-round-flow" name="detail-round-flow">
+                    <option value="1">Hiệp 1</option>
+                    <option value="2">Hiệp 2</option>
+                    <option value="-1">Hiệp phụ</option>
 
-                                        </select>
-                                    </div>
+                </select>
+            </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Thời gian</label>
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <input type="number" class="form-control change-time-start" id="minute_flow" name="minute_flow"  placeholder="Phút">
-                                            </div>
-                                            <div class="col-1 mt-auto mb-auto">:</div>
-                                            <div class="col-3">
-                                                <input type="number" class="form-control change-time-start" id="second_flow" name="second_flow"  placeholder="Giây">
-                                            </div>
-                                            <div class="col-12 mt-2" id="detail-info-valid-round">
+            <div class="mb-3">
+                <label class="form-label">Thời gian</label>
+                <div class="row">
+                    <div class="col-3">
+                        <input type="number" class="form-control change-time-start" id="minute_flow" name="minute_flow"  placeholder="Phút">
+                    </div>
+                    <div class="col-1 mt-auto mb-auto">:</div>
+                    <div class="col-3">
+                        <input type="number" class="form-control change-time-start" id="second_flow" name="second_flow"  placeholder="Giây">
+                    </div>
+                    <div class="col-12 mt-2" id="detail-info-valid-round">
 
-                                            </div>
-                                        </div>
-                                    </div>
+                    </div>
+                </div>
+            </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Đội</label>
+            <div class="mb-3">
+                <label for="detail-team-id" class="form-label">Đội</label>
 
-                                        <select class="form-select">
-                                            <option>Đội #1</option>
-                                            <option>Đội #2</option>
-                                        </select>
-                                    </div>
+                <select class="form-select" id="detail-team-id">
+                </select>
+            </div>
 
-                                    <div class="mb-3">
-                                        <label class="form-label">Cầu thủ</label>
+            <div class="mb-3">
+                <label for="detail-player-id" class="form-label">Cầu thủ</label>
 
-                                        <select class="form-select">
-                                            <option>Thái Văn Lung</option>
-                                            <option>Hậu Tạ</option>
-                                        </select>
-                                    </div>
+                <select class="form-select" id="detail-player-id">
+                </select>
+            </div>
+            <div class="mb-3">
+                <label for="detail-note" class="form-label">Ghi chú</label>
+                <textarea class="form-control" id="detail-note" rows="3" placeholder="Nhập ghi chú..."></textarea>
+            </div>
 
-                                    <div class="d-flex justify-content-end gap-2">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas">Hủy</button>
-                                        <button type="button" class="btn btn-primary">Thêm sự kiện</button>
-                                    </div>
+            <div class="d-flex justify-content-end gap-2">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="offcanvas">Hủy</button>
+                <button type="button" class="btn btn-primary" id="detail-add-event">Thêm sự kiện</button>
+            </div>
 
-                                </div>
-                            </div>
+        </div>
+    </div>
 
 </body>
 <script src="./js/pages/LoaiTrucTiep/data.js"></script>

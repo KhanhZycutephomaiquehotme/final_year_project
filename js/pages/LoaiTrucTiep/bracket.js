@@ -249,20 +249,19 @@ function pointLeft(el, container) {
 function renderListTeam() {
     const listTeam = state.elements.listTeam;
     state.data.teams.forEach((team) => {
-        const teamEL = document.createElement('div');
-        teamEL.className = "team-in-list";
-        teamEL.dataset.teamId = team.id;
-        teamEL.innerHTML = `
-            <div class="team-icon">🏆</div>
-
-            <div class="team-name">
-                ${team.name}
-            </div>
-
-            
-        `;
+        const teamEL = renderTeam(team);
         listTeam.appendChild(teamEL);
     });
+}
+function renderTeam(team) {
+    const teamEL = document.createElement('div');
+    teamEL.className = "team-in-list";
+    teamEL.dataset.teamId = team.id;
+    teamEL.innerHTML = `
+        <div class="team-icon">🏆</div>
+        <div class="team-name">${team.name}</div>
+    `;
+    return teamEL;
 }
 /**
  * Function khởi tạo sortable cho các slot của bracket và danh sách đội bóng
@@ -507,4 +506,22 @@ function _handleGetSlotInfo(slotEL) {
         slotIndex,
         match: state.tournament.rounds[roundIndex][matchIndex]
     };
+}
+function _addTeamInMatch(team, roundIndex, matchIndex, slotIndex) {
+    const bracket = state.elements.bracket;
+    const matchEL = bracket.querySelectorAll(`.match[data-match-key="${roundIndex}_${matchIndex}"]`)[0];
+    const teams = matchEL.querySelectorAll('.team');
+    let teamEL = slotIndex == 1 ? teams[1] : teams[0];
+    renderTeam(team);
+    teamEL.appendChild(renderTeam(team));
+    // test mới cần thêm vào tạm mốt có edit rồi thì tournament tự có => không cần thêm vào
+    state.tournament.rounds[roundIndex][matchIndex].teams[slotIndex] = {
+        team: team,
+        detail: {
+            players: [],
+            formation: {}
+        }
+    };
+    _handleUpdateMatch(matchEL);
+
 }

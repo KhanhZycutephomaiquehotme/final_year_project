@@ -7,7 +7,9 @@ const state = {
     tournament : {
         name: "Giải bóng đá sinh viên 2026",
         rounds: [],
-    },
+    }, 
+    // Match hiện tại đang edit
+    current_edit_match: null,
     elements: {
         // Lưới xếp trận đấu theo từng vòng
         bracket       : document.getElementById('bracket'),
@@ -40,8 +42,16 @@ const state = {
             matchFlow             : document.getElementById('match-flow-list'),
             btnEnableMatchFlow    : document.getElementById('btn-enable-match-flow'),
             // Thiết lập diễn biến trận đấu
-            matchFlowList: document.getElementById('match-flow-list'),
-
+            btnShowPanelAddEvent   : document.getElementById('show-panel-add-event'),
+            matchFlowList          : document.getElementById('match-flow-list'),
+            btnAddEvent            : document.getElementById('detail-add-event'),
+            selectTeamTabEvent     : document.getElementById('detail-team-id'),
+            selectPlayerTabEvent   : document.getElementById('detail-player-id'),
+            selectEventTypeTabEvent: document.getElementById('detail-event-type'),
+            inputMinuteTabEvent    : document.getElementById('minute_flow'),
+            inputSecondTabEvent    : document.getElementById('second_flow'),
+            inputNoteTabEvent      : document.getElementById('detail-note'),
+            selectRoundTabEvent    : document.getElementById('detail-round-flow'),
         }
     }
 }
@@ -65,12 +75,21 @@ async function init () {
     // Chuẩn bị sẵn data cho edit match
     await prepareDataEdit();
     // $('#settingMatch').modal('show');
+    
+    // $('#fill-tabpanel-2').tab('show');
+    _addTeamInMatch(state.data.teams[0], 0, 0, 0);
+    _addTeamInMatch(state.data.teams[1], 0, 0, 1);
+    // $('#settingMatch').modal('show');
+    document.querySelectorAll('.edit-team-round[data-match-key="0_0"]')[0].dispatchEvent(new Event('click', { bubbles: true }));
     state.elements.detailMatchModal.radioSettingMatchScore2.checked = true;
     state.elements.detailMatchModal.radioSettingMatchScore2.dispatchEvent(
             new Event('change', { bubbles: true })
     );
-    // $('#fill-tabpanel-2').tab('show');
-    $('#eventFormPanel').offcanvas('show');
+    $('#fill-tab-2').tab('show')    
+    state.elements.detailMatchModal.btnShowPanelAddEvent.dispatchEvent(
+        new Event('click', { bubbles: true })
+    );
+    // $('#eventFormPanel').offcanvas('show');
 } 
 async function prepareDataEdit() {
     const footballFieldSelect = state.elements.detailMatchModal.selectFootballField;

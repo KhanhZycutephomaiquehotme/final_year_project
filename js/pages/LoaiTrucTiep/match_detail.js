@@ -4,6 +4,7 @@ function _handleEventIconEdit_Click(e) {
           settingMatchModalEL.dataset.matchKey = matchKey;
     const [roundIndex, matchIndex]             = matchKey.split("_");
     const match                                = state.tournament.rounds[roundIndex][matchIndex];
+    state.current_edit_match = match;
     loadDataEdit(match);
     $('#settingMatch').modal('show');
 }
