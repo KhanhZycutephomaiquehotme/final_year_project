@@ -5,7 +5,7 @@ function _handleEventIconEdit_Click(e) {
     const [roundIndex, matchIndex]             = matchKey.split("_");
     const match                                = state.tournament.rounds[roundIndex][matchIndex];
     state.current_edit_match = match;
-    loadDataEdit(match);
+    $('#fill-tab-info').tab('show');
     $('#settingMatch').modal('show');
 }
 // event click save setting match 
@@ -71,7 +71,9 @@ document.getElementById('saveSettingMatch').addEventListener('click', (e) => {
     match.teams[0].detail.players = players1;
     match.teams[1].detail.players = players2;
 })
-function loadDataEdit(match) {
+state.elements.detailMatchModal.infoTab.addEventListener('shown.bs.tab', function (e) {
+    const match = state.current_edit_match;
+
     const detailMatchModal = state.elements.detailMatchModal;
 
     detailMatchModal.selectFootballField.value       = match.football_field_id;
@@ -82,19 +84,25 @@ function loadDataEdit(match) {
     detailMatchModal.radioSettingMatchScore2.checked = match.setting_match_score == 2 ? true : false;
     
     // trigger event change của 1 trong 2 checkbox để disable ô nhập tỉ số
-    detailMatchModal.radioSettingMatchScore1.dispatchEvent(new Event('change', { bubbles: true }));
+    _updateScoreSettingMatch(match.setting_match_score == 2 ? true : false);
     
     // Do dùng select2, nên các select cũng phải chạy event change để cho cập nhật lại selected
     detailMatchModal.selectFootballField.dispatchEvent(new Event('change', { bubbles: true }));
     detailMatchModal.selectReferee.dispatchEvent(new Event('change', { bubbles: true }));
 
-    detailMatchModal.inputScoreTeam1.value           = match.team1_score;
-    detailMatchModal.inputScoreTeam2.value           = match.team2_score;
-
+    
     let detail_team1 = match.teams[0];
     let detail_team2 = match.teams[1];
     
+    detailMatchModal.inputScoreTeam1.value           = detail_team1.score ?? 0;
+    detailMatchModal.inputScoreTeam2.value           = detail_team2.score ?? 0;
+});
+state.elements.detailMatchModal.footballFieldTab.addEventListener('shown.bs.tab', function (e) {
     // Lọc ra những player chưa có trên sân
+    const match = state.current_edit_match;
+     
+    let detail_team1 = match.teams[0];
+    let detail_team2 = match.teams[1];
     let team1_player_ids_in_pitch = detail_team1.detail.players.map((slot) => slot.id);
     let team2_player_ids_in_pitch = detail_team2.detail.players.map((slot) => slot.id);
 
@@ -107,46 +115,53 @@ function loadDataEdit(match) {
     renderPlayerInFootballPitch(true, detail_team1, detail_team2);
     renderPlayerInList(team1, team2);
     renderSortableSlotPlayer();
-}
+});
+
+state.elements.detailMatchModal.matchFlowTab.addEventListener('shown.bs.tab', function (e) {
+     // Lọc ra những player chưa có trên sân
+    const match = state.current_edit_match;
+    _updateMatchEventLock(match.setting_match_score == 2 ? true : false);
+     
+    let detail_team1 = match.teams[0];
+    let detail_team2 = match.teams[1];
+
+    _loadStateMatchFlow([...detail_team1.detail.events,...detail_team2.detail.events], detail_team1, detail_team2);
+});
 state.elements.detailMatchModal.radioSettingMatchScores.forEach((radio) => {
     radio.addEventListener('change', (event) => {
         const selectedValue = event.target.id;
-        if (selectedValue === 'radioSettingMatchScore1') {
-            // Tự thiết lập
-            state.elements.detailMatchModal.inputScoreTeam1.disabled = false;
-            state.elements.detailMatchModal.inputScoreTeam2.disabled = false;
-        } else if (selectedValue === 'radioSettingMatchScore2') {
-            // Thiết lập theo diễn biến trận đấu
-            state.elements.detailMatchModal.inputScoreTeam1.disabled = true;
-            state.elements.detailMatchModal.inputScoreTeam2.disabled = true;
-        }
-        state.elements.detailMatchModal.inputScoreTeam1.value = 0;
-        state.elements.detailMatchModal.inputScoreTeam2.value = 0;
-
-        _updateMatchEventLock();
+        _updateScoreSettingMatch(selectedValue == "radioSettingMatchScore1" ? false : true);
     });
 });
 
 state.elements.detailMatchModal.btnEnableMatchFlow.addEventListener('click', () => {
-    state.elements.detailMatchModal.radioSettingMatchScore2.checked = true;
-
-    state.elements.detailMatchModal.radioSettingMatchScore2.dispatchEvent(
-        new Event('change', { bubbles: true })
-    );
+    state.current_edit_match.setting_match_score = 2;
+    _updateMatchEventLock(true);
 });
 
+function _updateScoreSettingMatch(enable = false) {
+    if (!enable) {
+        // Tự thiết lập
+        state.elements.detailMatchModal.inputScoreTeam1.disabled = false;
+        state.elements.detailMatchModal.inputScoreTeam2.disabled = false;
+    } else {
+        // Thiết lập theo diễn biến trận đấu
+        state.elements.detailMatchModal.inputScoreTeam1.disabled = true;
+        state.elements.detailMatchModal.inputScoreTeam2.disabled = true;
+    }
+    state.elements.detailMatchModal.inputScoreTeam1.value = 0;
+    state.elements.detailMatchModal.inputScoreTeam2.value = 0;
+}
 
-function _updateMatchEventLock() {
-    state.elements.detailMatchModal.matchFlowLock.classList.toggle(
-        'hidden',
-        state.elements.detailMatchModal.radioSettingMatchScore2.checked
-    );
-    if (state.elements.detailMatchModal.radioSettingMatchScore2.checked) {
+function _updateMatchEventLock(enable = false) {
+    if (enable == true) {
         state.elements.detailMatchModal.matchFlowContainerDemo.style.setProperty("display", "none", "important");
         state.elements.detailMatchModal.matchFlowContainer.style.setProperty("display", "block", "important");
+        state.elements.detailMatchModal.matchFlowLock.style.setProperty("display", "none", "important");
     } else {
         state.elements.detailMatchModal.matchFlowContainerDemo.style.setProperty("display", "block", "important");
         state.elements.detailMatchModal.matchFlowContainer.style.setProperty("display", "none", "important");
+        state.elements.detailMatchModal.matchFlowLock.style.setProperty("display", "block", "important");
     }
 }
 

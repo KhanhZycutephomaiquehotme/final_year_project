@@ -402,6 +402,7 @@ function renderSortable() {
                     // Team mới => detail mới
                     detail: {
                         players: [],
+                        events: [],
                         formation: {}
                     }
                 };
@@ -486,6 +487,7 @@ function _handleEmptyTeamSlot() {
         team: null,
         detail: {
             players: [],
+            events: [],
             formation: {}
         }
     };
@@ -519,6 +521,7 @@ function _addTeamInMatch(team, roundIndex, matchIndex, slotIndex) {
         team: team,
         detail: {
             players: [],
+            events: [],
             formation: {}
         }
     };

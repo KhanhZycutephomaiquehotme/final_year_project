@@ -20,6 +20,12 @@ const state = {
         // Modal thiết lập trận đấu
         detailMatchModal   : {
             modal: document.getElementById('settingMatch'),
+            // TAB thông tin trận đấu
+            infoTab : document.getElementById('fill-tab-info'),
+            // TAB đội hình ra sân
+            footballFieldTab: document.getElementById('fill-tab-football-field'),
+            // TAB diễn biến chính
+            matchFlowTab: document.getElementById('fill-tab-match-flow'),
             // Thiết lập cầu thủ ra sân
             footballOverlay: document.getElementById('football-overlay'),
             playerList     : document.getElementById('player-list'),
@@ -81,11 +87,11 @@ async function init () {
     _addTeamInMatch(state.data.teams[1], 0, 0, 1);
     // $('#settingMatch').modal('show');
     document.querySelectorAll('.edit-team-round[data-match-key="0_0"]')[0].dispatchEvent(new Event('click', { bubbles: true }));
-    state.elements.detailMatchModal.radioSettingMatchScore2.checked = true;
+    state.current_edit_match.setting_match_score = 2;
     state.elements.detailMatchModal.radioSettingMatchScore2.dispatchEvent(
             new Event('change', { bubbles: true })
     );
-    $('#fill-tab-2').tab('show')    
+    $('#fill-tab-match-flow').tab('show')    
     state.elements.detailMatchModal.btnShowPanelAddEvent.dispatchEvent(
         new Event('click', { bubbles: true })
     );

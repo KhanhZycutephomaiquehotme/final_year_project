@@ -39,17 +39,27 @@
 
 <!-- THẺ ĐỎ -->
 <template id="red-card-template">
-    <div class="mb-2 mx-auto">
+    <div class="mb-2 mx-auto w-75">
         <div class="card">
-            <div class="card-header d-flex">
-                <div class="container-icon-development">
-                    <img src="./img/red-card.svg" alt="Red card icon">
+            <div class="card-header d-flex justify-content-between">
+                <div class="red-card-title">
+                    <div class="container-icon-development">
+                        <img src="./img/red-card.svg" alt="Red card icon">
+                    </div>
+                    <div>Thẻ đỏ</div>
                 </div>
-                <div>Thẻ đỏ</div>
+                <div class="match-flow-time">
+                    Thời gian
+                </div>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h5 class="match-flow-name-player-goal">Tên cầu thủ ghi bàn</h5>
+                <div class="d-flex gap-2">
+                    <div class="match-flow-team-goal">Đội tuyển</div>
+                    <div>&#x2022;</div>
+                    <div class="match-flow-role-player-goal">Vai trò</div>
+                </div>
+                <div class="match-flow-note"></div>
             </div>
         </div>
     </div>
@@ -75,18 +85,52 @@
 
 <!-- THẺ VÀNG -->
 <template id="yellow-card-template">
-    <div class="mb-2 mx-auto">
+    <div class="mb-2 mx-auto w-75">
         <div class="card">
-            <div class="card-header d-flex">
-                <div class="container-icon-development">
-                    <img src="./img/yellow-card.svg" alt="Yellow card icon">
+            <div class="card-header d-flex justify-content-between">
+                <div class="yellow-card-title">
+                    <div class="container-icon-development">
+                        <img src="./img/yellow-card.svg" alt="Yellow card icon">
+                    </div>
+                    <div>Thẻ vàng</div>
                 </div>
-                <div>Thẻ vàng</div>
+                <div class="match-flow-time">
+                    Thời gian
+                </div>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <h5 class="match-flow-name-player-goal">Tên cầu thủ ghi bàn</h5>
+                <div class="d-flex gap-2">
+                    <div class="match-flow-team-goal">Đội tuyển</div>
+                    <div>&#x2022;</div>
+                    <div class="match-flow-role-player-goal">Vai trò</div>
+                </div>
+                <div class="match-flow-note"></div>
             </div>
+        </div>
+    </div>
+</template>
+<!-- Time line Trận đấu-->
+<template id="match-flow-timeline-template">
+    <div class="mb-2 mx-auto w-75">
+        <div class="match-flow-timeline">
+            <div class="match-flow-timeline-line"></div>
+
+            <div class="match-flow-timeline-content">
+                <div class="match-flow-timeline-icon">
+                    <i class="fa-regular fa-clock"></i>
+                </div>
+
+                <div class="match-flow-timeline-title">
+                    Title chính
+                </div>
+
+                <div class="match-flow-timeline-subtitle">
+                    Title phụ
+                </div>
+            </div>
+
+            <div class="match-flow-timeline-line"></div>
         </div>
     </div>
 </template>

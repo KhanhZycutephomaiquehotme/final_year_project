@@ -272,3 +272,41 @@
     font-size: 17px;
     font-weight: 500;
 }
+
+.match-flow-timeline {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.match-flow-timeline-line {
+    flex: 1;
+    height: 1px;
+    background: #e5e5e5;
+}
+
+.match-flow-timeline-content {
+    width: 230px;
+    text-align: center;
+    flex-shrink: 0;
+}
+
+.match-flow-timeline-icon {
+    font-size: 20px;
+    color: #7d858c;
+    margin-bottom: 4px;
+}
+
+.match-flow-timeline-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4b4b4b;
+}
+
+.match-flow-timeline-subtitle {
+    margin-top: 4px;
+    font-size: 13px;
+    color: #999;
+    font-weight: 600;
+}

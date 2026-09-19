@@ -12,6 +12,7 @@
     <script src="./vendor/jquery/jquery-4.0.0.min.js"></script>
     <script src="./vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <link rel="stylesheet" href="./vendor/select2/css/select2.min.css">
+    <link rel="stylesheet" href="./vendor/fontawesome/css/all.min.css">
     <script src="./vendor/select2/js/select2.min.js"></script>
 </head>
 
@@ -35,19 +36,19 @@
             <div class="modal-body">
                 <ul class="nav nav-fill nav-tabs" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link active" id="fill-tab-0" data-bs-toggle="tab" href="#fill-tabpanel-0" role="tab" aria-controls="fill-tabpanel-0" aria-selected="true">THÔNG TIN TRẬN ĐẤU</a>
+                        <a class="nav-link active" id="fill-tab-info" data-bs-toggle="tab" href="#info-tabpanel" role="tab" aria-controls="info-tabpanel" aria-selected="true">THÔNG TIN TRẬN ĐẤU</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="fill-tab-1" data-bs-toggle="tab" href="#fill-tabpanel-1" role="tab" aria-controls="fill-tabpanel-1" aria-selected="false">ĐỘI HÌNH RA SÂN</a>
+                        <a class="nav-link" id="fill-tab-football-field" data-bs-toggle="tab" href="#football-field-tabpanel" role="tab" aria-controls="football-field-tabpanel" aria-selected="false">ĐỘI HÌNH RA SÂN</a>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="fill-tab-2" data-bs-toggle="tab" href="#fill-tabpanel-2" role="tab" aria-controls="fill-tabpanel-2" aria-selected="false">DIỄN BIẾN CHÍNH</a>
+                        <a class="nav-link" id="fill-tab-match-flow" data-bs-toggle="tab" href="#match-flow-tabpanel" role="tab" aria-controls="match-flow-tabpanel" aria-selected="false">DIỄN BIẾN CHÍNH</a>
                     </li>
                 </ul>
                 <div class="tab-content pt-5" id="tab-content">
 
                 <!-- TAB THÔNG TIN TRẬN ĐẤU -->
-                <div class="tab-pane active" id="fill-tabpanel-0">
+                <div class="tab-pane active" id="info-tabpanel">
                     <form>
                         <div class="form-group mb-3">
                             <label for="selectFootballField" class="mb-2">Chọn sân đấu</label>
@@ -70,7 +71,7 @@
                                 <label class="mb-2">Thiết lập tỉ số trận đấu</label>
                                 <div>
                                     <div class="form-check">
-                                        <input class="form-check-input " type="radio" name="radioSettingMatchScore" id="radioSettingMatchScore1" checked>
+                                        <input class="form-check-input" type="radio" name="radioSettingMatchScore" id="radioSettingMatchScore1" checked>
                                         <label class="form-check-label" for="radioSettingMatchScore1">
                                             Tự thiết lập
                                         </label>
@@ -101,7 +102,7 @@
                 </div>
 
                 <!-- TAB THIẾT LẬP CẦU THỦ RA SÂN -->
-                <div class="tab-pane" id="fill-tabpanel-1">
+                <div class="tab-pane" id="football-field-tabpanel">
                     <div class="row">
                         <div class="col-8" id="football-field">
 
@@ -168,7 +169,7 @@
 
 
                 <!-- THIẾT LẬP DIỄN BIẾN TRẬN ĐẤU -->
-                <div class="tab-pane" id="fill-tabpanel-2">
+                <div class="tab-pane" id="match-flow-tabpanel">
                     <div class="match-flow-body">
                         <div id="match-flow-lock" class="match-flow-lock">
                             <div class="match-flow-lock-content">
@@ -249,16 +250,15 @@
             <div class="mb-3">
                 <label class="form-label">Thời gian</label>
                 <div class="row">
-                    <div class="col-3">
-                        <input type="number" class="form-control change-time-start" id="minute_flow" name="minute_flow"  placeholder="Phút">
+                    <div class="row align-items-center">
+                        <div class="col-4">
+                            <input type="number" class="form-control change-time-start" id="minute_flow" name="minute_flow"  placeholder="Phút">
+                        </div>
+                        <div class="col-4">
+                            <label for="minute_flow">phút</label>
+                        </div>
                     </div>
-                    <div class="col-1 mt-auto mb-auto">:</div>
-                    <div class="col-3">
-                        <input type="number" class="form-control change-time-start" id="second_flow" name="second_flow"  placeholder="Giây">
-                    </div>
-                    <div class="col-12 mt-2" id="detail-info-valid-round">
-
-                    </div>
+                    <div class="col-12 mt-2" id="detail-info-valid-round"></div>
                 </div>
             </div>
 
