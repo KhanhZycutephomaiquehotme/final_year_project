@@ -34,13 +34,11 @@ document.getElementById('saveSettingMatch').addEventListener('click', (e) => {
     slotTeam1s.forEach((el, key) => {
         const inputPlayer = el.querySelector('.input-player-data');
         if (inputPlayer) {
-            const slotIndex = el.dataset.slotIndex;
-            const playerId  = inputPlayer.dataset.playerId;
-            const teamId    = inputPlayer.dataset.teamId;
-            const player    = {
-                'slot_index': parseInt(slotIndex),
-                'id'        : parseInt(playerId),
-            };
+            const slotIndex         = el.dataset.slotIndex;
+            const playerId          = inputPlayer.dataset.playerId;
+            const teamId            = inputPlayer.dataset.teamId;
+            var   player            = inputPlayer._player;
+                  player.slot_index = parseInt(slotIndex)
             players1.push(player);
         }
     })
@@ -49,13 +47,11 @@ document.getElementById('saveSettingMatch').addEventListener('click', (e) => {
     slotTeam2s.forEach((el, key) => {
         const inputPlayer = el.querySelector('.input-player-data');
         if (inputPlayer) {
-            const slotIndex = el.dataset.slotIndex;
-            const playerId  = inputPlayer.dataset.playerId;
-            const teamId    = inputPlayer.dataset.teamId;
-            const player    = {
-                'slot_index': parseInt(slotIndex),
-                'id'        : parseInt(playerId),
-            };
+            const slotIndex         = el.dataset.slotIndex;
+            const playerId          = inputPlayer.dataset.playerId;
+            const teamId            = inputPlayer.dataset.teamId;
+            var   player            = inputPlayer._player;
+                  player.slot_index = parseInt(slotIndex)
             players2.push(player);
         }
     })

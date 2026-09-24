@@ -150,6 +150,7 @@ function renderPlayerAvatar(playerEl) {
     const player = playerEl._player;
     const inputPlayer = document.createElement('input');
     inputPlayer.className = 'input-player-data';
+    inputPlayer._player = player;
     inputPlayer.type = 'hidden';
     inputPlayer.dataset.teamId = player.id;
     inputPlayer.dataset.playerId = player.id;

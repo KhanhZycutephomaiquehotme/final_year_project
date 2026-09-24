@@ -12,37 +12,91 @@ spanBagdeInjuryRound.innerHTML = "Thời gian bù giờ của hiệp <span class
 
 // document.getElementById('detail-info-valid-round').innerHTML = "";
 document.getElementById('detail-info-valid-round').appendChild(spanBagdeValidRound)
+function reloadPlayerInAndOutMatch () {
+    const match = state.current_edit_match;
+    const detail_team_1 = match.teams[0];
+    const detail_team_2 = match.teams[1];
+    const player_in_and_out_match_1 = _getTeamPlayerInAndOutMatch(detail_team_1);
+    const player_in_and_out_match_2 = _getTeamPlayerInAndOutMatch(detail_team_2);
 
-function _prepareDataEditEventMatch(match) {
+    detail_team_1.detail.current_player_in_match = player_in_and_out_match_1.player_in_match;
+    detail_team_1.detail.current_player_out_match = player_in_and_out_match_1.player_out_match;
+
+
+    detail_team_2.detail.current_player_in_match = player_in_and_out_match_2.player_in_match;
+    detail_team_2.detail.current_player_out_match = player_in_and_out_match_2.player_out_match;
+    state.elements.detailMatchModal.selectTeamTabEvent.dispatchEvent(new Event('change', { bubbles: true }));
+
+}
+function _getTeamPlayerInAndOutMatch (team) {
+    const player_in_match = [];
+    const player_out_match = [];
+    team.detail.players.forEach((item,index) => {
+        let count_out_match = team.detail.events.filter((event) => event.player2Id == item.id && event.eventType == 4).length;
+        let count_in_match = team.detail.events.filter((event) => event.playerId == item.id && event.eventType == 4).length;
+
+        let has_red_card = team.detail.events.some((event) => event.playerId == item.id && event.eventType == 3);
+
+        let has_2_yellow_card = team.detail.events.filter((event) => event.playerId == item.id && event.eventType == 2).length >= 2 ? true : false;
+
+        // Nếu số lần ra sân == số lần vào sân => cầu thủ được phép thay ra
+        let check_in_match = true;
+        if (count_out_match != count_in_match || has_red_card || has_2_yellow_card) {
+            check_in_match = false;
+        }
+
+        if (check_in_match) player_in_match.push(item);
+        else player_out_match.push(item);
+
+    })
+    return {player_in_match : player_in_match, player_out_match: player_out_match};
+}
+function _prepareDataEditEventMatch() {
+
+    const match = state.current_edit_match;
+
+    let detail_team1 = match.teams[0];
+    let detail_team2 = match.teams[1];
+    state.elements.detailMatchModal.selectTeamTabEvent.innerHTML = '';
     // Đội
+    
     const optionTeam1 = document.createElement('option');
     // optionTeam1.value = match.teams[0].team.team;
-    optionTeam1.value       = match.teams[0].team.id;
-    optionTeam1.textContent = match.teams[0].team.name;
+    optionTeam1.value       = detail_team1.team.id;
+    optionTeam1.textContent = detail_team1.team.name;
     optionTeam1.dataset.teamIndex = 0;
     state.elements.detailMatchModal.selectTeamTabEvent.appendChild(optionTeam1);
     const optionTeam2 = document.createElement('option');
-    optionTeam2.value       = match.teams[1].team.id;
+    optionTeam2.value       = detail_team2.team.id;
     optionTeam2.dataset.teamIndex = 1;
-    optionTeam2.textContent = match.teams[1].team.name;
+    optionTeam2.textContent = detail_team2.team.name;
     state.elements.detailMatchModal.selectTeamTabEvent.appendChild(optionTeam2);
-    // Cầu thủ
-    match.teams[0].team.players.forEach((player) => {
-        const optionPlayer = document.createElement('option');
-        optionPlayer.value = player.id;
-        optionPlayer.textContent = player.name;
-        state.elements.detailMatchModal.selectPlayerTabEvent.appendChild(optionPlayer);
-    })
-    match.teams[1].team.players.forEach((player) => {
-        const optionPlayer = document.createElement('option');
-        optionPlayer.value = player.id;
-        optionPlayer.textContent = player.name;
-        state.elements.detailMatchModal.selectPlayerTabEvent.appendChild(optionPlayer);
-    })
+
+
+    // Load player, lấy players còn trên sân và đang ở ngoài sân từ diễn biến trận đấu
+    reloadPlayerInAndOutMatch();
+    // state.elements.detailMatchModal.selectTeamTabEvent.dispatchEvent(new Event('change', { bubbles: true }));
+
+
 }
 state.elements.detailMatchModal.btnShowPanelAddEvent.addEventListener('click', (e) => {
     $('#eventFormPanel').offcanvas('show');
-    _prepareDataEditEventMatch(state.current_edit_match);
+    _prepareDataEditEventMatch();
+});
+state.elements.detailMatchModal.selectTeamTabEvent.addEventListener('change', function (e) {
+    const value = e.target.value;
+    const option = e.target.options[e.target.selectedIndex];
+
+    const teamIndex = option.dataset.teamIndex;
+    const players = state.current_edit_match.teams[teamIndex].detail.current_player_in_match;
+
+    state.elements.detailMatchModal.selectPlayerTabEvent.innerHTML = '';
+    players.forEach((player) => {
+        const optionPlayer             = document.createElement('option');
+              optionPlayer.value       = player.id;
+              optionPlayer.textContent = player.name;
+        state.elements.detailMatchModal.selectPlayerTabEvent.appendChild(optionPlayer);
+    });
 });
 document.querySelectorAll('.change-time-start').forEach((el) => {
     el.addEventListener('change', (e) => {
@@ -82,7 +136,9 @@ state.elements.detailMatchModal.btnAddEvent.addEventListener('click', (e) => {
     // Mốt còn validate (nếu có)
     // _validateAddEventMatchFlow(round, minutes, seconds, eventType, teamId, playerId, note);
     // Thêm event vào state
-    current_match.teams[teamIndex].score =  current_match.teams[teamIndex].score ? current_match.teams[teamIndex].score + 1 : 1;
+    if (eventType == 1) {
+        current_match.teams[teamIndex].score =  current_match.teams[teamIndex].score ? current_match.teams[teamIndex].score + 1 : 1;
+    }
     current_match.teams[teamIndex].detail.events.push({
         round    : round,
         minutes  : minutes,
@@ -92,6 +148,7 @@ state.elements.detailMatchModal.btnAddEvent.addEventListener('click', (e) => {
         note     : note,
     });
     const allMatchFlows = [...current_match.teams[0].detail.events, ... current_match.teams[1].detail.events];
+    reloadPlayerInAndOutMatch();
     _loadStateMatchFlow(allMatchFlows, current_match.teams[0], current_match.teams[1]);
     // _addEventMatchFlow(round, minutes, eventType, teamIndex, playerId, note);
     
